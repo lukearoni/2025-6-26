@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Race and Income",
+    "section": "",
+    "text": "The plot displays the distribution of median household income across different racial majorities within New York City census tracts, faceted by borough. Each point represents a tract, with the x-axis showing median income and the y-axis showing the race that makes up the largest group in that tract. We observe that census tracts where White residents are the majority tend to have significantly higher median incomes across all boroughs, while tracts with Black or Hispanic majorities tend to have lower median incomes, especially in the Bronx and Brooklyn. This suggests a strong relationship between racial demographics and economic inequality at the neighborhood level, highlighting persistent socioeconomic disparities across racial groups in New York City."
+  }
+]
