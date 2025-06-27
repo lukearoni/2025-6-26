@@ -1,0 +1,46 @@
+---
+title: "Race and Income"
+author: Luke Li
+execute:
+    echo: false
+    warning: false
+    message: false
+---
+
+```{r}
+library(tidyverse)
+library(primer.data)
+NYC_tracts <- read_csv("https://raw.githubusercontent.com/PPBDS/primer.data/master/data-raw/nyc_tracts.csv")
+```
+
+```{r}
+library(stringr)
+library(scales)
+# Step 1: Extract borough/county name
+NYC_tracts <- NYC_tracts |> 
+  mutate(borough = str_extract(tract, "(?<=; ).*?(?= County)"), borough = str_replace(borough, "Richmond", "Staten Island"))
+
+# Step 2: Remove missing income values
+NYC_tracts_clean <- NYC_tracts |> 
+  drop_na(med_income)
+
+# Step 3: Plot
+ggplot(NYC_tracts_clean, aes(x = med_income, y = race)) +
+  geom_point(aes(color = med_income), alpha = 0.4, size = 2) +
+  facet_wrap(~borough, ncol = 1) +
+  scale_x_continuous(labels = dollar_format()) +
+   scale_color_gradientn(colors = c("red", "yellow", "green"), guide = "none") +
+  labs(
+    title = "Race and Income Across Census Tracts in New York City",
+    x = "Median household income",
+    y = "Largest group in Census tract"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    strip.text = element_text(size = 14, face = "bold"),
+    plot.title = element_text(hjust = 0.5, face = "bold", family = "Times New Roman", size = 16),
+  )
+```
+
+The plot displays the distribution of median household income across different racial majorities within New York City census tracts, faceted by borough. Each point represents a tract, with the x-axis showing median income and the y-axis showing the race that makes up the largest group in that tract. We observe that census tracts where White residents are the majority tend to have significantly higher median incomes across all boroughs, while tracts with Black or Hispanic majorities tend to have lower median incomes, especially in the Bronx and Brooklyn. This suggests a strong relationship between racial demographics and economic inequality at the neighborhood level, highlighting persistent socioeconomic disparities across racial groups in New York City.
