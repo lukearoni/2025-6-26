@@ -26,7 +26,7 @@ NYC_tracts_clean <- NYC_tracts |>
 
 # Step 3: Plot
 ggplot(NYC_tracts_clean, aes(x = med_income, y = race)) +
-  geom_point(aes(color = med_income), alpha = 0.4, size = 2) +
+  geom_jitter(aes(color = med_income), alpha = 0.4, size = 2) +
   facet_wrap(~borough, ncol = 1) +
   scale_x_continuous(labels = dollar_format()) +
    scale_color_gradientn(colors = c("red", "yellow", "green"), guide = "none") +
